@@ -31,7 +31,7 @@ spec:
       serviceAccountName: aqua-kube-enforcer-sa
       containers:
         - name: kube-enforcer
-          image: registry.aquasec.com/kube-enforcer:5.3
+          image: docker.io/aquasec/kube-enforcer:latest
           imagePullPolicy: Always
           livenessProbe:
             tcpSocket:
@@ -69,8 +69,9 @@ spec:
               path: aqua_ke.crt
             - key: aqua_ke.key
               path: aqua_ke.key 
-      imagePullSecrets:
-        - name: aqua-registry
+      # Needed if using self hosted images
+      #imagePullSecrets:
+      #  - name: aqua-registry
   selector:
     matchLabels:
       app: aqua-kube-enforcer
