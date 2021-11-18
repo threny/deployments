@@ -48,7 +48,7 @@ spec:
           containerPort: 8082
         volumeMounts:
         - name: config
-          mountPath: /etc/envoy
+          mountPath: /home/tharshini9099
 #        - name: certs
 #          mountPath: /etc/ssl/envoy
         readinessProbe:
@@ -80,7 +80,7 @@ spec:
         configMap:
           defaultMode: 420
           name: envoy-conf
-#      - name: certs
-#        secret:
-#          defaultMode: 420
-#          secretName: aqua-lb-certs
+      - name: certs
+        secret:
+          defaultMode: 420
+          secretName: aqua-lb-certs
