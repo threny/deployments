@@ -65,20 +65,20 @@ spec:
               key: password
               name: aqua-db
         volumeMounts:
-        - mountPath: /opt/aquasec/ssl
+        - mountPath: /home/tharshini9099
           name: aqua-grpc-web
           readOnly: true
-       volumes:
-       - name: aqua-grpc-web
-         secret:
-           secretName: aqua-grpc-web
-           items:
-           - key: aqua_web.crt
-             path: cert.pem
-           - key: aqua_web.key
-             path: key.pem
-           - key: rootCA.crt
-             path: ca.pem
+      volumes:
+      - name: aqua-grpc-web
+        secret:
+          secretName: aqua-grpc-web
+          items:
+          - key: aqua_web.crt
+            path: aqua_web.pem
+          - key: aqua_web.key
+            path: key.pem
+          - key: rootCA.crt
+            path: rootCA.pem
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -139,17 +139,17 @@ spec:
               key: password
               name: aqua-audit-db
         volumeMounts:
-        - mountPath: /opt/aquasec/ssl
+        - mountPath: /home/tharshini9099
           name: aqua-grpc-gateway
           readOnly: true
-       volumes:
-       - name: aqua-grpc-gateway
-         secret:
-           secretName: aqua-grpc-gateway
-           items:
-           - key: aqua_gateway.crt
-             path: cert.pem
-           - key: aqua_gateway.key
-             path: key.pem
-           - key: rootCA.crt
-             path: ca.pem
+      volumes:
+      - name: aqua-grpc-gateway
+        secret:
+          secretName: aqua-grpc-gateway
+          items:
+          - key: aqua_gateway.crt
+            path: cert.pem
+          - key: aqua_gateway.key
+            path: key.pem
+          - key: rootCA.crt
+            path: ca.pem
