@@ -50,13 +50,13 @@ data:
   HEALTH_MONITOR: "0.0.0.0:8082"
   
   #Server's private key for HTTPS and Mutual Auth
-  # AQUA_PRIVATE_KEY: "/opt/aquasec/ssl/key.pem"
+  AQUA_PRIVATE_KEY: "/opt/aquasec/ssl/key.pem"
   
   #Server's public key for HTTPS and Mutual Auth
-  # AQUA_PUBLIC_KEY: "/opt/aquasec/ssl/cert.pem"
+  AQUA_PUBLIC_KEY: "/opt/aquasec/ssl/cert.pem"
   
   #Server's root CA cert for HTTPS and Mutual Auth. The root CA certificate file should be mutual for both Gateway and Server certificates
-  # AQUA_ROOT_CA: "/opt/aquasec/ssl/ca.pem"
+  AQUA_ROOT_CA: "/opt/aquasec/ssl/ca.pem"
 
   #Setting this to 1 configures the gateway to verify the certificate sent by the Enforcer. This is required if you configure mutual authentication between the Enforcer and gateway.
   # AQUA_VERIFY_ENFORCER: "1"
