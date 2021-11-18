@@ -48,17 +48,17 @@ data:
           tls_context:
             common_tls_context:
     # Used with self-signed certs and AQUA_TLS_VERIFY=true on the Enforcer and if the below chain does not include a root cert
-    #         validation_context:
-    #           trusted_ca:
-    #             filename: "/etc/ssl/envoy/ca.crt
+             validation_context:
+               trusted_ca:
+                 filename: "/home/tharshini9099/rootCA.crt"
               alpn_protocols: "h2,http/1.1"
               tls_certificates:
               - certificate_chain:
     #cert location for communication to Enforcer
-                  filename: "/etc/ssl/envoy/tls.crt"
+                  filename: "/home/tharshini9099/rootCA.crt"
                 private_key:
     #private_key location  for communication to Enforcer
-                  filename: "/etc/ssl/envoy/tls.key"
+                  filename: "/home/tharshini9099/rootCA.key"
       clusters:
       - name: aqua-gateway
         connect_timeout: 180s
