@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: aqua-gateway
+  name: aqua-gateway
+  namespace: aqua
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aqua-gateway
+  template:
+    metadata:
+      labels:
+        app: aqua-gateway
+      name: aqua-gateway
+    spec:
+      securityContext:
+        runAsUser: 11431
+        runAsGroup: 11433
+        fsGroup: 11433
+      serviceAccount: aqua-sa
+      restartPolicy: Always
+      containers:
+      - name: aqua-gateway
+        image: registry.aquasec.com/gateway:6.2
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8082
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          tcpSocket:
+            port: 8443
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        ports:
+        - containerPort: 3622
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: aqua-csp-server-config
+        env:
+        - name: SCALOCK_DBPASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: aqua-db
+        - name: SCALOCK_AUDIT_DBPASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: aqua-audit-db
+        volumeMounts:
+        - mountPath: /opt/aquasec/ssl
+          name: aqua-grpc-gateway
+          readOnly: true
+       volumes:
+       - name: aqua-grpc-gateway
+         secret:
+           secretName: aqua-grpc-gateway
+           items:
+           - key: aqua_gateway.crt
+             path: cert.pem
+           - key: aqua_gateway.key
+             path: key.pem
+           - key: rootCA.crt
+             path: ca.pem
