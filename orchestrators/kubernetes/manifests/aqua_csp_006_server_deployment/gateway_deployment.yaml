@@ -56,18 +56,18 @@ spec:
             secretKeyRef:
               key: password
               name: aqua-audit-db
-        volumeMounts:
-        - mountPath: /opt/aquasec/ssl
-          name: aqua-grpc-gateway
-          readOnly: true
-       volumes:
-       - name: aqua-grpc-gateway
-         secret:
-           secretName: aqua-grpc-gateway
-           items:
-           - key: aqua_gateway.crt
-             path: cert.pem
-           - key: aqua_gateway.key
-             path: key.pem
-           - key: rootCA.crt
-             path: ca.pem
+      #   volumeMounts:
+      #   - mountPath: /opt/aquasec/ssl
+      #     name: aqua-grpc-gateway
+      #     readOnly: true
+      # volumes:
+      # - name: aqua-grpc-gateway
+      #   secret:
+      #     secretName: aqua-grpc-gateway
+      #     items:
+      #     - key: aqua_gateway.crt
+      #       path: cert.pem
+      #     - key: aqua_gateway.key
+      #       path: key.pem
+      #     - key: rootCA.crt
+      #       path: ca.pem
